@@ -19,7 +19,6 @@ const BottomTab = () => {
 
           if (route.name === 'Save') {
             iconName = focused ? 'database-plus' : 'database-plus-outline';
-            size = 33;
           }
           else if (route.name === 'Search') {
             iconName = focused ? 'database-search' : 'database-search-outline';

@@ -1,7 +1,3 @@
-/*
-Created by Ruthvik on 10/06/2023
-Part of a code for SRpass app in react native
-*/
 import * as React from 'react';
 import {
   Text,
@@ -19,6 +15,7 @@ import * as Device from 'expo-device';
 import { LogBox } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import Modal from 'react-native-modal';
+import { stylesConfig } from '../utils/styleConfig';
 LogBox.ignoreLogs(['Clipboard']);
 
 const ThirdScreen = () => {
@@ -136,23 +133,23 @@ const ThirdScreen = () => {
 
 
   return (
-    <View style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollContent}>
+    <View style={stylesConfig.container}>
+      <ScrollView contentContainerStyle={stylesConfig.scrollContent}>
         <View
           style={[
-            styles.hstack,
+            stylesConfig.hstack,
             { alignItems: 'center', marginBottom: 5, marginTop: 10 },
           ]}>
           <Icon name="lock-outline" size={40} color="#000000" />
-          <Text style={styles.title}>Password Manager</Text>
+          <Text style={stylesConfig.title}>Password Manager</Text>
         </View>
         <View>
           {loading && <ActivityIndicator size="large" color="#000000" />}
         </View>
-        <Card style={styles.card}>
-          <View style={styles.entryContainer}>
+        <Card style={stylesConfig.card}>
+          <View style={stylesConfig.entryContainer}>
             <Icon name="database-edit" size={35} color="#000000" />
-            <Text style={styles.entryTitle}>{text}</Text>
+            <Text style={stylesConfig.entryTitle}>{text}</Text>
           </View>
           <Searchbar
             placeholder="Search"
@@ -169,7 +166,7 @@ const ThirdScreen = () => {
             iconColor="#000000"
             clearIconColor="#000"
           />
-          <View style={styles.hstack}>
+          <View style={stylesConfig.hstack}>
             <View style={styles.inputContainer}>
               <TextInput
                 label="Username*"
@@ -193,7 +190,7 @@ const ThirdScreen = () => {
               marginTop={20}
             />
           </View>
-          <View style={styles.hstack}>
+          <View style={stylesConfig.hstack}>
             <View style={styles.inputContainer}>
               <TextInput
                 label="Password*"
@@ -216,7 +213,7 @@ const ThirdScreen = () => {
               }}
             />
           </View>
-          <View style={styles.hstack}>
+          <View style={stylesConfig.hstack}>
             <View style={styles.inputContainer}>
               <TextInput
                 label="Category"
@@ -239,7 +236,7 @@ const ThirdScreen = () => {
               }}
             />
           </View>
-          <View style={styles.hstack}>
+          <View style={stylesConfig.hstack}>
             <View style={styles.inputContainer}>
               <TextInput
                 label="Description"
@@ -263,7 +260,7 @@ const ThirdScreen = () => {
               }}
             />
           </View>
-          <View style={styles.hstack}>
+          <View style={stylesConfig.hstack}>
             <View style={styles.dropdownContainer}>
               <Picker
                 selectedValue={type}
@@ -295,7 +292,7 @@ const ThirdScreen = () => {
               theme={{ colors: { primary: '#a9a9a9' } }}
             />
           </View>
-          <View style={styles.hstack}>
+          <View style={stylesConfig.hstack}>
             <Button
               title="Clear"
               titleStyle={{
@@ -353,7 +350,7 @@ const ThirdScreen = () => {
               underlineColor='transparent'
               onChangeText={setAuth}
             />
-            <View style={styles.hstack}>
+            <View style={stylesConfig.hstack}>
               <Button
                 title="Cancel"
                 titleStyle={{
@@ -401,71 +398,55 @@ const ThirdScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#ffffff',
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#ffffff",
     paddingBottom: 20,
   },
   scrollContent: {
     flexGrow: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   title: {
     fontSize: 25,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginLeft: 10,
   },
-  card: {
-    width: '88%',
-    borderRadius: 10,
-    elevation: 5,
-    padding: 15,
-    backgroundColor: '#ffffff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    shadowColor: '#000000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 4,
-  },
   hstack: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   entryContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
   },
   entryTitle: {
     fontSize: 25,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginLeft: 10,
   },
   input: {
     marginTop: 5,
     fontSize: 14,
-    width: '100%',
-    marginLeft: '7%',
+    width: "100%",
+    marginLeft: "7%",
     borderRadius: 25,
-    backgroundColor: '#ffffff',
+    backgroundColor: "#ffffff",
   },
-  pinput:{
+  pinput: {
     marginTop: 5,
     fontSize: 14,
-    width: '100%',
-    marginLeft: '7%',
+    width: "100%",
+    marginLeft: "7%",
     borderRadius: 25,
-    backgroundColor: 'transparent',
-    borderColor:'transparent',
+    backgroundColor: "transparent",
+    borderColor: "transparent",
   },
   searchstyle: {
-    color: '#000',
-    placeholderTextColor: '#000000',
+    color: "#000",
+    placeholderTextColor: "#000000",
   },
   inputContainer: {
     width: 250,
@@ -479,7 +460,7 @@ const styles = StyleSheet.create({
     width: 120,
     height: 30,
     borderWidth: 1,
-    borderColor: '#a9a9a9',
+    borderColor: "#a9a9a9",
     borderRadius: 5,
   },
   smallinput2: {
@@ -489,20 +470,20 @@ const styles = StyleSheet.create({
   resbox: {
     marginTop: 5,
     fontSize: 14,
-    width: '80%',
-    marginLeft: '10%',
+    width: "80%",
+    marginLeft: "10%",
     borderRadius: 15,
-    backgroundColor: '#ffffff',
+    backgroundColor: "#ffffff",
   },
   modalContainer: {
-    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    backgroundColor: "rgba(255, 255, 255, 0.9)",
     padding: 20,
     borderRadius: 10,
-    alignItems: 'center',
+    alignItems: "center",
   },
   modalTitle: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 16,
   },
 });
