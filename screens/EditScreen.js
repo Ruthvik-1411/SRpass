@@ -1,55 +1,55 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   Text,
   View,
   StyleSheet,
   Alert,
-  Clipboard,
   ScrollView,
   ActivityIndicator,
-} from 'react-native';
-import { Card, Searchbar, TextInput, IconButton } from 'react-native-paper';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { Button } from 'react-native-elements';
-import * as Device from 'expo-device';
-import { LogBox } from 'react-native';
-import { Picker } from '@react-native-picker/picker';
-import Modal from 'react-native-modal';
-import { stylesConfig } from '../utils/styleConfig';
-LogBox.ignoreLogs(['Clipboard']);
+} from "react-native";
+import { Card, Searchbar, TextInput, IconButton } from "react-native-paper";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import { Button } from "react-native-elements";
+import * as Device from "expo-device";
+import { Picker } from "@react-native-picker/picker";
+import Modal from "react-native-modal";
 
-const ThirdScreen = () => {
-  const [searchQuery, setSearchQuery] = React.useState('');
-  const [text, setText] = React.useState('Edit Entry');
-  const [username, setUsername] = React.useState('');
-  const [password, setPassword] = React.useState('');
-  const [category, setCategory] = React.useState('');
-  const [description, setDescription] = React.useState('');
-  const [type, settype] = React.useState('Final');
-  const [updated, setUpdated] = React.useState('');//to handle last updated
-  const [recur, setrecur] = React.useState('');//to handle the password expiry status
-  const [loading, setLoading] = React.useState(false);//to handle loading effect
-  const [stat, setstat] = React.useState(false);//to handle status of search
-  const [auth, setAuth] = React.useState('');//to handle confirmation password while deleting
-  const [isModalVisible, setIsModalVisible] = React.useState(false);//to handle delete popup
+import { stylesConfig } from "../utils/styleConfig";
+import { white, black, inputgrey, copyToClipboard } from "../utils/config";
+
+const EditScreen = () => {
+  const [searchQuery, setSearchQuery] = React.useState("");
+  const [text, setText] = React.useState("Edit Entry");
+  const [username, setUsername] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [category, setCategory] = React.useState("");
+  const [description, setDescription] = React.useState("");
+  const [type, settype] = React.useState("Final");
+  const [updated, setUpdated] = React.useState(""); //to handle last updated
+  const [recur, setrecur] = React.useState(""); //to handle the password expiry status
+  const [loading, setLoading] = React.useState(false); //to handle loading effect
+  const [stat, setstat] = React.useState(false); //to handle status of search
+  const [auth, setAuth] = React.useState(""); //to handle confirmation password while deleting
+  const [isModalVisible, setIsModalVisible] = React.useState(false); //to handle delete popup
   let deviceId = Device.designName;
 
   function handleupdate() {
     //when update is clicked without searching anything alert the user
     if (stat === true) {
       //when username,password are empty
-      if (username === '' || password === '') {
-        alert('Please fill in all the * fields.');
+      if (username === "" || password === "") {
+        alert("Please fill in all the * fields.");
         return;
-      } else if (category === '' || description === '') {//when cat,description are left blank
-        setCategory('Work');
-        setDescription('Nil');
+      } else if (category === "" || description === "") {
+        //when cat,description are left blank
+        setCategory("Work");
+        setDescription("Nil");
         handleUpdate();
       } else {
         handleUpdate();
       }
     } else {
-      Alert.alert('Please search before proceeding');
+      Alert.alert("Please search before proceeding");
     }
   }
 
@@ -58,15 +58,15 @@ const ThirdScreen = () => {
     //popup a confirmation alert
     if (stat === true) {
       Alert.alert(
-        'Delete Entry',
-        'Are you sure you want to delete ' + text + '?',
+        "Delete Entry",
+        "Are you sure you want to delete " + text + "?",
         [
           {
-            text: 'Cancel',
-            style: 'cancel',
+            text: "Cancel",
+            style: "cancel",
           },
           {
-            text: 'Yes',
+            text: "Yes",
             onPress: () => {
               setIsModalVisible(true);
             },
@@ -75,42 +75,42 @@ const ThirdScreen = () => {
         { cancelable: false }
       );
     } else {
-      Alert.alert('Please search before proceeding');
+      Alert.alert("Please search before proceeding");
     }
   }
 
   const handlePasswordSubmit = () => {
     //when password is entered after confirmation
-    if (auth === '**********') {
+    if (auth === "**********") {
       setIsModalVisible(false);
-      setAuth('');
+      setAuth("");
       handleDelete();
       setstat(false);
     } else {
       Alert.alert(
-        'Incorrect Password',
-        'Please enter the correct password to delete the entry.'
+        "Incorrect Password",
+        "Please enter the correct password to delete the entry."
       );
     }
   };
 
   const handleCancel = () => {
     setIsModalVisible(false);
-    setAuth('');
+    setAuth("");
   };
 
   const handleclr = () => {
     setLoading(false);
     setstat(false);
-    setText('Edit Entry');
-    setSearchQuery('');
-    setUsername('');
-    setPassword('');
-    setCategory('');
-    setDescription('');
-    settype('');
-    setUpdated('');
-    setrecur('');
+    setText("Edit Entry");
+    setSearchQuery("");
+    setUsername("");
+    setPassword("");
+    setCategory("");
+    setDescription("");
+    settype("");
+    setUpdated("");
+    setrecur("");
   };
 
   function handleSearch() {
@@ -131,25 +131,20 @@ const ThirdScreen = () => {
     //removed for obvious reasons
   }
 
-
   return (
     <View style={stylesConfig.container}>
       <ScrollView contentContainerStyle={stylesConfig.scrollContent}>
-        <View
-          style={[
-            stylesConfig.hstack,
-            { alignItems: 'center', marginBottom: 5, marginTop: 10 },
-          ]}>
-          <Icon name="lock-outline" size={40} color="#000000" />
+        <View style={stylesConfig.titlecontainer}>
+          <Icon name="lock-outline" size={40} color={black} />
           <Text style={stylesConfig.title}>Password Manager</Text>
-        </View>
-        <View>
-          {loading && <ActivityIndicator size="large" color="#000000" />}
         </View>
         <Card style={stylesConfig.card}>
           <View style={stylesConfig.entryContainer}>
-            <Icon name="database-edit" size={35} color="#000000" />
+            <Icon name="database-edit" size={35} color={black} />
             <Text style={stylesConfig.entryTitle}>{text}</Text>
+            <View style={stylesConfig.loadercontainer}>
+              {loading && <ActivityIndicator size="small" color={black} />}
+            </View>
           </View>
           <Searchbar
             placeholder="Search"
@@ -159,12 +154,12 @@ const ThirdScreen = () => {
               handleSearch();
             }}
             onClearIconPress={() => {
-              setText('Edit Entry');
+              setText("Edit Entry");
             }}
             style={styles.input}
             inputStyle={styles.searchstyle}
-            iconColor="#000000"
-            clearIconColor="#000"
+            iconColor={black}
+            clearIconColor={black}
           />
           <View style={stylesConfig.hstack}>
             <View style={styles.inputContainer}>
@@ -176,18 +171,17 @@ const ThirdScreen = () => {
                 maxLength={30}
                 onChangeText={(text) => setUsername(text)}
                 style={styles.resbox}
-                theme={{ colors: { primary: '#a9a9a9' } }}
+                theme={{ colors: { primary: inputgrey } }}
               />
             </View>
             <IconButton
               icon="content-copy"
-              iconColor="#ffffff"
+              iconColor={black}
               size={24}
               onPress={() => {
-                Clipboard.setString(username);
-                Alert.alert('Copied Username to Clipboard!');
+                copyToClipboard(username);
+                Alert.alert("Copied Username to Clipboard!");
               }}
-              marginTop={20}
             />
           </View>
           <View style={stylesConfig.hstack}>
@@ -200,16 +194,16 @@ const ThirdScreen = () => {
                 placeholder="password/[dd/mm/yyyy]"
                 onChangeText={(text) => setPassword(text)}
                 style={styles.resbox}
-                theme={{ colors: { primary: '#a9a9a9' } }}
+                theme={{ colors: { primary: inputgrey } }}
               />
             </View>
             <IconButton
               icon="content-copy"
-              iconColor="#ffffff"
+              iconColor={black}
               size={24}
               onPress={() => {
-                Clipboard.setString(password);
-                Alert.alert('Copied Password to Clipboard!');
+                copyToClipboard(password);
+                Alert.alert("Copied Password to Clipboard!");
               }}
             />
           </View>
@@ -223,16 +217,16 @@ const ThirdScreen = () => {
                 maxLength={20}
                 onChangeText={(text) => setCategory(text)}
                 style={styles.resbox}
-                theme={{ colors: { primary: '#a9a9a9' } }}
+                theme={{ colors: { primary: inputgrey } }}
               />
             </View>
             <IconButton
               icon="content-copy"
-              iconColor="#ffffff"
+              iconColor={black}
               size={24}
               onPress={() => {
-                Clipboard.setString(category);
-                Alert.alert('Copied to Clipboard!');
+                copyToClipboard(category);
+                Alert.alert("Copied to Clipboard!");
               }}
             />
           </View>
@@ -247,16 +241,16 @@ const ThirdScreen = () => {
                 onChangeText={(text) => setDescription(text)}
                 style={styles.resbox}
                 underlineColor="transparent"
-                theme={{ colors: { primary: '#a9a9a9' } }}
+                theme={{ colors: { primary: inputgrey } }}
               />
             </View>
             <IconButton
               icon="content-copy"
-              iconColor="#ffffff"
+              iconColor={black}
               size={24}
               onPress={() => {
                 Clipboard.setString(description);
-                Alert.alert('Copied to Clipboard!');
+                Alert.alert("Copied to Clipboard!");
               }}
             />
           </View>
@@ -265,7 +259,8 @@ const ThirdScreen = () => {
               <Picker
                 selectedValue={type}
                 style={styles.dropdown}
-                onValueChange={(itemValue) => settype(itemValue)}>
+                onValueChange={(itemValue) => settype(itemValue)}
+              >
                 <Picker.Item label="Final" value="final" />
                 <Picker.Item label="Date" value="date" />
               </Picker>
@@ -278,7 +273,7 @@ const ThirdScreen = () => {
                 mode="flat"
                 multiline={true}
                 style={styles.resbox}
-                theme={{ colors: { primary: '#a9a9a9' } }}
+                theme={{ colors: { primary: inputgrey } }}
               />
             </View>
           </View>
@@ -289,19 +284,19 @@ const ThirdScreen = () => {
               disabled={true}
               mode="flat"
               style={styles.resbox}
-              theme={{ colors: { primary: '#a9a9a9' } }}
+              theme={{ colors: { primary: inputgrey } }}
             />
           </View>
           <View style={stylesConfig.hstack}>
             <Button
               title="Clear"
               titleStyle={{
-                color: '#ffffff',
+                color: white,
                 fontSize: 18,
-                fontWeight: 'bold',
+                fontWeight: "bold",
               }}
               buttonStyle={{
-                backgroundColor: '#000000',
+                backgroundColor: black,
                 borderRadius: 20,
                 marginTop: 20,
                 marginLeft: 25,
@@ -313,7 +308,7 @@ const ThirdScreen = () => {
             />
             <IconButton
               icon="delete"
-              iconColor="#ffffff"
+              iconColor={black}
               size={40}
               onPress={handledel}
               style={{ marginTop: 20, marginLeft: 12, marginRight: 8 }}
@@ -321,12 +316,12 @@ const ThirdScreen = () => {
             <Button
               title="Update"
               titleStyle={{
-                color: '#ffffff',
+                color: white,
                 fontSize: 18,
-                fontWeight: 'bold',
+                fontWeight: "bold",
               }}
               buttonStyle={{
-                backgroundColor: '#000000',
+                backgroundColor: black,
                 borderRadius: 20,
                 marginTop: 20,
                 marginLeft: 5,
@@ -347,19 +342,19 @@ const ThirdScreen = () => {
               placeholder="Password"
               maxLength={25}
               value={auth}
-              underlineColor='transparent'
+              underlineColor="transparent"
               onChangeText={setAuth}
             />
             <View style={stylesConfig.hstack}>
               <Button
                 title="Cancel"
                 titleStyle={{
-                  color: '#000000',
+                  color: black,
                   fontSize: 18,
-                  fontWeight: 'bold',
+                  fontWeight: "bold",
                 }}
                 buttonStyle={{
-                  backgroundColor: 'transparent',
+                  backgroundColor: "transparent",
                   borderRadius: 20,
                   marginTop: 20,
                   marginLeft: 10,
@@ -372,12 +367,12 @@ const ThirdScreen = () => {
               <Button
                 title="Submit"
                 titleStyle={{
-                  color: '#000000',
+                  color: black,
                   fontSize: 18,
-                  fontWeight: 'bold',
+                  fontWeight: "bold",
                 }}
                 buttonStyle={{
-                  backgroundColor: 'transparent',
+                  backgroundColor: "transparent",
                   borderRadius: 20,
                   marginTop: 20,
                   marginLeft: 5,
@@ -396,44 +391,13 @@ const ThirdScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#ffffff",
-    paddingBottom: 20,
-  },
-  scrollContent: {
-    flexGrow: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  title: {
-    fontSize: 25,
-    fontWeight: "bold",
-    marginLeft: 10,
-  },
-  hstack: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  entryContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  entryTitle: {
-    fontSize: 25,
-    fontWeight: "bold",
-    marginLeft: 10,
-  },
   input: {
     marginTop: 5,
     fontSize: 14,
-    width: "100%",
-    marginLeft: "7%",
-    borderRadius: 25,
-    backgroundColor: "#ffffff",
+    width: "94%",
+    marginLeft: "5%",
+    borderRadius: 30,
+    backgroundColor: "#f7f7f7",
   },
   pinput: {
     marginTop: 5,
@@ -445,8 +409,8 @@ const styles = StyleSheet.create({
     borderColor: "transparent",
   },
   searchstyle: {
-    color: "#000",
-    placeholderTextColor: "#000000",
+    color: black,
+    placeholderTextColor: black,
   },
   inputContainer: {
     width: 250,
@@ -460,7 +424,7 @@ const styles = StyleSheet.create({
     width: 120,
     height: 30,
     borderWidth: 1,
-    borderColor: "#a9a9a9",
+    borderColor: inputgrey,
     borderRadius: 5,
   },
   smallinput2: {
@@ -473,7 +437,7 @@ const styles = StyleSheet.create({
     width: "80%",
     marginLeft: "10%",
     borderRadius: 15,
-    backgroundColor: "#ffffff",
+    backgroundColor: white,
   },
   modalContainer: {
     backgroundColor: "rgba(255, 255, 255, 0.9)",
@@ -488,4 +452,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ThirdScreen;
+export default EditScreen;

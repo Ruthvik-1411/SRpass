@@ -14,8 +14,9 @@ import { Picker } from "@react-native-picker/picker";
 import * as Device from "expo-device";
 
 import { stylesConfig } from "../utils/styleConfig";
+import { white, black, inputgrey } from "../utils/config";
 
-const FirstScreen = () => {
+const SaveScreen = () => {
   const [title, setTitle] = React.useState("");
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -61,16 +62,16 @@ const FirstScreen = () => {
     <View style={stylesConfig.container}>
       <ScrollView contentContainerStyle={stylesConfig.scrollContent}>
         <View style={stylesConfig.titlecontainer}>
-          <Icon name="lock-outline" size={40} color="#000000" />
+          <Icon name="lock-outline" size={40} color={black} />
           <Text style={stylesConfig.title}>Password Manager</Text>
         </View>
         <Card style={stylesConfig.card}>
           <View style={stylesConfig.entryContainer}>
-            <Icon name="database-plus" size={35} color="#000000" />
+            <Icon name="database-plus" size={35} color={black} />
             <Text style={stylesConfig.entryTitle}>New Entry</Text>
-						<View style={stylesConfig.loadercontainer}>
-          {loading && <ActivityIndicator size="small" color="#000000" />}
-        </View>
+            <View style={stylesConfig.loadercontainer}>
+              {loading && <ActivityIndicator size="small" color={black} />}
+            </View>
           </View>
           <View style={styles.inputContainer}>
             <TextInput
@@ -81,7 +82,7 @@ const FirstScreen = () => {
               mode="flat"
               maxLength={30}
               style={styles.input}
-              theme={{ colors: { primary: "#a9a9a9" } }}
+              theme={{ colors: { primary: inputgrey } }}
             />
           </View>
           <View style={styles.inputContainer}>
@@ -93,7 +94,7 @@ const FirstScreen = () => {
               mode="flat"
               maxLength={30}
               style={styles.input}
-              theme={{ colors: { primary: "#a9a9a9" } }}
+              theme={{ colors: { primary: inputgrey } }}
             />
           </View>
           <View style={styles.inputContainer}>
@@ -105,7 +106,7 @@ const FirstScreen = () => {
               mode="flat"
               maxLength={32}
               style={styles.input}
-              theme={{ colors: { primary: "#a9a9a9" } }}
+              theme={{ colors: { primary: inputgrey } }}
             />
           </View>
           <View style={styles.inputContainer}>
@@ -117,7 +118,7 @@ const FirstScreen = () => {
               mode="flat"
               maxLength={20}
               style={styles.input}
-              theme={{ colors: { primary: "#a9a9a9" } }}
+              theme={{ colors: { primary: inputgrey } }}
             />
           </View>
           <View style={styles.inputContainer}>
@@ -129,7 +130,7 @@ const FirstScreen = () => {
               multiline={true}
               maxLength={60}
               style={styles.input}
-              theme={{ colors: { primary: "#a9a9a9" } }}
+              theme={{ colors: { primary: inputgrey } }}
             />
           </View>
           <View style={stylesConfig.hstack}>
@@ -161,7 +162,7 @@ const FirstScreen = () => {
             <Button
               title="Clear"
               titleStyle={{
-                color: "#ffffff",
+                color: white,
                 fontSize: 18,
                 fontWeight: "bold",
               }}
@@ -179,12 +180,12 @@ const FirstScreen = () => {
             <Button
               title="Save"
               titleStyle={{
-                color: "#ffffff",
+                color: white,
                 fontSize: 18,
                 fontWeight: "bold",
               }}
               buttonStyle={{
-                backgroundColor: "#000000",
+                backgroundColor: black,
                 borderRadius: 20,
                 marginTop: 40,
                 marginLeft: 50,
@@ -218,9 +219,9 @@ const styles = StyleSheet.create({
     width: 140,
     height: 20,
     borderWidth: 1,
-    borderColor: "#a9a9a9",
+    borderColor: inputgrey,
     borderRadius: 5,
   },
 });
 
-export default FirstScreen;
+export default SaveScreen;

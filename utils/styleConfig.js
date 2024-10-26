@@ -42,6 +42,7 @@ export const stylesConfig = StyleSheet.create({
     },
     shadowOpacity: 0.3,
     shadowRadius: 4,
+    bottom: -10,
   },
   hstack: {
     flexDirection: "row",

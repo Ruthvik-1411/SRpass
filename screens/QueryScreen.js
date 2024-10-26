@@ -4,7 +4,6 @@ import {
   View,
   StyleSheet,
   Alert,
-  Clipboard,
   ScrollView,
   ActivityIndicator,
 } from "react-native";
@@ -12,11 +11,11 @@ import { Card, Searchbar, TextInput, IconButton } from "react-native-paper";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { Button } from "react-native-elements";
 import * as Device from "expo-device";
-import { LogBox } from "react-native";
 import { stylesConfig } from "../utils/styleConfig";
-LogBox.ignoreLogs(["Clipboard"]);
 
-const SecondScreen = () => {
+import { white, black, inputgrey, copyToClipboard } from "../utils/config";
+
+const QueryScreen = () => {
   const [searchQuery, setSearchQuery] = React.useState("");
   const [text, setText] = React.useState("Search Entry");
   const [username, setUsername] = React.useState("");
@@ -50,22 +49,17 @@ const SecondScreen = () => {
   return (
     <View style={stylesConfig.container}>
       <ScrollView contentContainerStyle={stylesConfig.scrollContent}>
-        <View
-          style={[
-            stylesConfig.hstack,
-            { alignItems: "center", marginBottom: 5, marginTop: 10 },
-          ]}
-        >
-          <Icon name="lock-outline" size={40} color="#000000" />
+        <View style={stylesConfig.titlecontainer}>
+          <Icon name="lock-outline" size={40} color={black} />
           <Text style={stylesConfig.title}>Password Manager</Text>
-        </View>
-        <View style={stylesConfig.loadercontainer}>
-          {loading && <ActivityIndicator size="large" color="#000000" />}
         </View>
         <Card style={stylesConfig.card}>
           <View style={stylesConfig.entryContainer}>
-            <Icon name="database-search" size={35} color="#000000" />
+            <Icon name="database-search" size={35} color={black} />
             <Text style={stylesConfig.entryTitle}>{text}</Text>
+            <View style={stylesConfig.loadercontainer}>
+              {loading && <ActivityIndicator size="small" color={black} />}
+            </View>
           </View>
           <Searchbar
             placeholder="Search"
@@ -79,8 +73,8 @@ const SecondScreen = () => {
             }}
             style={styles.input}
             inputStyle={styles.searchstyle}
-            iconColor="#000000"
-            clearIconColor="#000"
+            iconColor={black}
+            clearIconColor={black}
           />
           <View style={stylesConfig.hstack}>
             <View style={styles.inputContainer}>
@@ -90,18 +84,17 @@ const SecondScreen = () => {
                 disabled={true}
                 mode="flat"
                 style={styles.resbox}
-                theme={{ colors: { primary: "#a9a9a9" } }}
+                theme={{ colors: { primary: inputgrey } }}
               />
             </View>
             <IconButton
               icon="content-copy"
-              iconColor="#ffffff"
+              iconColor={black}
               size={24}
               onPress={() => {
-                Clipboard.setString(username);
+                copyToClipboard(username);
                 Alert.alert("Copied Username to Clipboard!");
               }}
-              marginTop={20}
             />
           </View>
           <View style={stylesConfig.hstack}>
@@ -112,15 +105,15 @@ const SecondScreen = () => {
                 disabled={true}
                 mode="flat"
                 style={styles.resbox}
-                theme={{ colors: { primary: "#a9a9a9" } }}
+                theme={{ colors: { primary: inputgrey } }}
               />
             </View>
             <IconButton
               icon="content-copy"
-              iconColor="#ffffff"
+              iconColor={black}
               size={24}
               onPress={() => {
-                Clipboard.setString(password);
+                copyToClipboard(password);
                 Alert.alert("Copied Password to Clipboard!");
               }}
             />
@@ -133,15 +126,15 @@ const SecondScreen = () => {
                 disabled={true}
                 mode="flat"
                 style={styles.resbox}
-                theme={{ colors: { primary: "#a9a9a9" } }}
+                theme={{ colors: { primary: inputgrey } }}
               />
             </View>
             <IconButton
               icon="content-copy"
-              iconColor="#ffffff"
+              iconColor={black}
               size={24}
               onPress={() => {
-                Clipboard.setString(category);
+                copyToClipboard(category);
                 Alert.alert("Copied to Clipboard!");
               }}
             />
@@ -155,15 +148,15 @@ const SecondScreen = () => {
                 mode="flat"
                 multiline={true}
                 style={styles.resbox}
-                theme={{ colors: { primary: "#a9a9a9" } }}
+                theme={{ colors: { primary: inputgrey } }}
               />
             </View>
             <IconButton
               icon="content-copy"
-              iconColor="#ffffff"
+              iconColor={black}
               size={24}
               onPress={() => {
-                Clipboard.setString(description);
+                copyToClipboard(description);
                 Alert.alert("Copied to Clipboard!");
               }}
             />
@@ -177,7 +170,7 @@ const SecondScreen = () => {
                 mode="flat"
                 multiline={true}
                 style={styles.resbox}
-                theme={{ colors: { primary: "#a9a9a9" } }}
+                theme={{ colors: { primary: inputgrey } }}
               />
             </View>
             <View style={styles.smallinput2}>
@@ -188,7 +181,7 @@ const SecondScreen = () => {
                 mode="flat"
                 multiline={true}
                 style={styles.resbox}
-                theme={{ colors: { primary: "#a9a9a9" } }}
+                theme={{ colors: { primary: inputgrey } }}
               />
             </View>
           </View>
@@ -199,19 +192,19 @@ const SecondScreen = () => {
               disabled={true}
               mode="flat"
               style={styles.resbox}
-              theme={{ colors: { primary: "#a9a9a9" } }}
+              theme={{ colors: { primary: inputgrey } }}
             />
           </View>
           <View style={{ alignItems: "center" }}>
             <Button
               title="Clear"
               titleStyle={{
-                color: "#ffffff",
+                color: white,
                 fontSize: 18,
                 fontWeight: "bold",
               }}
               buttonStyle={{
-                backgroundColor: "#000000",
+                backgroundColor: black,
                 borderRadius: 20,
                 marginTop: 20,
               }}
@@ -228,48 +221,17 @@ const SecondScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#ffffff",
-    paddingBottom: 20,
-  },
-  scrollContent: {
-    flexGrow: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  title: {
-    fontSize: 25,
-    fontWeight: "bold",
-    marginLeft: 10,
-  },
-  hstack: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  entryContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  entryTitle: {
-    fontSize: 25,
-    fontWeight: "bold",
-    marginLeft: 10,
-  },
   input: {
     marginTop: 5,
     fontSize: 14,
-    width: "97%",
+    width: "94%",
     marginLeft: "5%",
-    borderRadius: 25,
-    backgroundColor: "#ffffff",
+    borderRadius: 30,
+    backgroundColor: "#f4f4f4",
   },
   searchstyle: {
     color: "#000",
-    placeholderTextColor: "#000000",
+    placeholderTextColor: black,
   },
   inputContainer: {
     width: 250,
@@ -289,9 +251,9 @@ const styles = StyleSheet.create({
     fontSize: 14,
     width: "80%",
     marginLeft: "10%",
-    borderRadius: 15,
-    backgroundColor: "#ffffff",
+    borderRadius: 0,
+    backgroundColor: white,
   },
 });
 
-export default SecondScreen;
+export default QueryScreen;
