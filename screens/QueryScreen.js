@@ -169,7 +169,6 @@ const QueryScreen = () => {
                 value={type}
                 disabled={true}
                 mode="flat"
-                // multiline={true}
                 style={styles.resbox}
                 theme={{ colors: { primary: inputgrey } }}
               />
@@ -228,7 +227,6 @@ const styles = StyleSheet.create({
     width: "94%",
     marginLeft: "5%",
     borderRadius: 30,
-    // right: 10,
     backgroundColor: white,
   },
   searchstyle: {

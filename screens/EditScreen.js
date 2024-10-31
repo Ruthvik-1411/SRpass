@@ -418,14 +418,11 @@ const styles = StyleSheet.create({
     height: 60,
   },
   dropdownContainer: {
-    // marginTop: 25,
     width: 120,
     height: 50,
     marginLeft: 20,
   },
   dropdown: {
-    // width: 120,
-    // height: 20,
     borderWidth: 1,
     borderColor: inputgrey,
     borderRadius: 5,
