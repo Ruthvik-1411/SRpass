@@ -160,6 +160,7 @@ const EditScreen = () => {
             inputStyle={styles.searchstyle}
             iconColor={black}
             clearIconColor={black}
+            elevation={2}
           />
           <View style={stylesConfig.hstack}>
             <View style={styles.inputContainer}>
@@ -249,7 +250,7 @@ const EditScreen = () => {
               iconColor={black}
               size={24}
               onPress={() => {
-                Clipboard.setString(description);
+                copyToClipboard(description);
                 Alert.alert("Copied to Clipboard!");
               }}
             />
@@ -397,7 +398,7 @@ const styles = StyleSheet.create({
     width: "94%",
     marginLeft: "5%",
     borderRadius: 30,
-    backgroundColor: "#f7f7f7",
+    backgroundColor: white,
   },
   pinput: {
     marginTop: 5,
@@ -414,15 +415,17 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     width: 250,
-    height: 55,
+    height: 60,
   },
   dropdownContainer: {
-    marginTop: 25,
+    // marginTop: 25,
+    width: 120,
+    height: 50,
     marginLeft: 20,
   },
   dropdown: {
-    width: 120,
-    height: 30,
+    // width: 120,
+    // height: 20,
     borderWidth: 1,
     borderColor: inputgrey,
     borderRadius: 5,

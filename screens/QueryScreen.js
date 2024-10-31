@@ -75,6 +75,7 @@ const QueryScreen = () => {
             inputStyle={styles.searchstyle}
             iconColor={black}
             clearIconColor={black}
+            elevation={2}
           />
           <View style={stylesConfig.hstack}>
             <View style={styles.inputContainer}>
@@ -168,7 +169,7 @@ const QueryScreen = () => {
                 value={type}
                 disabled={true}
                 mode="flat"
-                multiline={true}
+                // multiline={true}
                 style={styles.resbox}
                 theme={{ colors: { primary: inputgrey } }}
               />
@@ -195,7 +196,7 @@ const QueryScreen = () => {
               theme={{ colors: { primary: inputgrey } }}
             />
           </View>
-          <View style={{ alignItems: "center" }}>
+          <View style={{alignSelf: "center"}}>
             <Button
               title="Clear"
               titleStyle={{
@@ -227,10 +228,11 @@ const styles = StyleSheet.create({
     width: "94%",
     marginLeft: "5%",
     borderRadius: 30,
-    backgroundColor: "#f4f4f4",
+    // right: 10,
+    backgroundColor: white,
   },
   searchstyle: {
-    color: "#000",
+    color: black,
     placeholderTextColor: black,
   },
   inputContainer: {
@@ -251,7 +253,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     width: "80%",
     marginLeft: "10%",
-    borderRadius: 0,
+    borderRadius: 15,
     backgroundColor: white,
   },
 });
